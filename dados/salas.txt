@@ -1,0 +1,8 @@
+id	nome	setor_id	categoria	descricao
+SAL-001	Sala de Servidores	3	SERVIDORES	Infraestrutura central
+SAL-002	Armário de Telecomunicações	3	TELECOM	Equipamentos de rede
+SAL-003	Sala Administrativa	1	ESCRITORIO	
+SAL-004	Sala Financeira	2	ESCRITORIO	
+SAL-005	Sala de TI	3	ESCRITORIO	
+SAL-006	Sala de RH	4	ESCRITORIO	
+SAL-007	Sala de reuniões da cupula	4	OUTRO	Uma sala de reuniões para o alto escalão da empresa

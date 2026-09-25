@@ -1,0 +1,2 @@
+id	hostname	tipo	fabricante	codigo_fabricante	numero_serie	usuario	responsavel	setor_id	sala_id	descricao
+1DEL157	SRV-IGOR-157	SERVIDOR	debian	DEL	157	Igor	Plinio	1	SAL-003	um servidor para registro de arquivos log de transações realizadas na empresa

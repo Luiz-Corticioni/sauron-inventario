@@ -1,0 +1,3 @@
+id	data_hora	ator	acao	entidade	detalhes
+AUD-000001	2026-09-25T21:38:56+00:00	ADMIN_PIN	EXCECAO_LOCALIZACAO	SAL-003	Servidor autorizado em Sala Administrativa (ESCRITORIO).
+AUD-000002	2026-09-25T21:44:11+00:00	ADMIN_PIN	CRIAR_SALA	SAL-007	Sala 'Sala de reuniões da cupula' [OUTRO] criada em Recursos Humanos.
