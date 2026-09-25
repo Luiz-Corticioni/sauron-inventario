@@ -1,0 +1,5 @@
+id	nome	setor_pai_id	descricao
+1	Administração		
+2	Financeiro		
+3	TI		
+4	Recursos Humanos		

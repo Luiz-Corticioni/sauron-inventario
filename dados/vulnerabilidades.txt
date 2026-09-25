@@ -1,0 +1,2 @@
+id	ativo_id	codigo_categoria	categoria	descricao	severidade	status	tratamento_sugerido
+VUL-04-001	1DEL157	4	Configuração incorreta	O servidor não está requirindo as devidas credenciais necessárias para ser autenticado	MEDIA	ABERTA	Revisar a configuração e aplicar uma referência segura.

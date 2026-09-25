@@ -1,14 +1,18 @@
-"""Ponto de entrada e menus do sistema Sentinela.
+"""Ponto de entrada e menus do sistema Sauron.
 
-Este arquivo coordena os módulos. As regras dos ativos ficam em ``ativos.py``,
-as vulnerabilidades em ``vulnerabilidades.py`` e o arquivo JSON em ``dados.py``.
+Arquivo central, "O cérebro do sistema" As regras dos ativos ficam em ``ativos.py``,
+as vulnerabilidades em ``vulnerabilidades.py`` e as tabelas TXT em ``dados.py``.
 """
 
 import ativos
+import auditoria
 import dados
+import estrutura
+import modo_euler
 import vulnerabilidades
 from utilitarios import (
     cabecalho,
+    exibir_banner,
     ler_opcao,
     menu_catalogo,
     mostrar_mapa,
@@ -55,6 +59,7 @@ def menu_vulnerabilidades(base):
 
     while True:
         cabecalho("GESTÃO DE VULNERABILIDADES")
+        print("IDs: VUL-TT-NNN (TT identifica o tipo da vulnerabilidade)")
         print("1 - Cadastrar vulnerabilidade")
         print("2 - Visualizar vulnerabilidades")
         print("3 - Atualizar vulnerabilidade")
@@ -70,11 +75,13 @@ def menu_vulnerabilidades(base):
             continue
 
         if escolha == "1":
-            salvar_se_alterado(base, vulnerabilidades.cadastrar(base, ativo))
+            salvar_se_alterado(
+                base, vulnerabilidades.cadastrar(base["ativos"], ativo)
+            )
         elif escolha == "2":
             vulnerabilidades.listar(ativo)
         elif escolha == "3":
-            salvar_se_alterado(base, vulnerabilidades.atualizar(ativo))
+            salvar_se_alterado(base, vulnerabilidades.atualizar(base["ativos"], ativo))
         elif escolha == "4":
             salvar_se_alterado(base, vulnerabilidades.remover(ativo))
 
@@ -89,32 +96,42 @@ def executar():
         print("O sistema foi encerrado para não sobrescrever a base com defeito.")
         return
 
+    exibir_banner()
     while True:
-        cabecalho("SENTINELA - INVENTÁRIO DE SEGURANÇA DE TI")
+        cabecalho("SAURON — INVENTÁRIO E INTELIGÊNCIA DE INFRAESTRUTURA")
         print("1 - Gestão de ativos")
         print("2 - Gestão de vulnerabilidades")
-        print("3 - Mapa da infraestrutura")
-        print("4 - Catálogo educativo de vulnerabilidades")
-        print("5 - Painel de segurança")
+        print("3 - Estrutura da empresa: setores, subsetores e salas")
+        print("4 - Mapa dinâmico da infraestrutura")
+        print("5 - Catálogo educativo de vulnerabilidades")
+        print("6 - Painel de segurança")
+        print("7 - Modo Euler — laboratório matemático")
+        print("8 - Registro de auditoria administrativa")
         print("0 - Sair")
-        escolha = ler_opcao("Opção: ", range(0, 6))
+        escolha = ler_opcao("Opção: ", range(0, 9))
 
         try:
             if escolha == "0":
-                print("\nDados preservados. Encerrando o Sentinela.")
+                print("\nDados preservados. O Olho de Sauron foi encerrado.")
                 return
             if escolha == "1":
                 menu_ativos(base)
             elif escolha == "2":
                 menu_vulnerabilidades(base)
             elif escolha == "3":
-                mostrar_mapa(base)
+                estrutura.menu(base, salvar_se_alterado)
             elif escolha == "4":
-                menu_catalogo()
+                mostrar_mapa(base)
             elif escolha == "5":
-                mostrar_painel(base)
+                menu_catalogo()
+            elif escolha == "6":
+                mostrar_painel(base["ativos"])
+            elif escolha == "7":
+                modo_euler.menu_modo_euler()
+            elif escolha == "8":
+                auditoria.listar(base)
         except dados.ErroDeDados as erro:
-            # Erros de arquivo são informados sem derrubar o menu inteiro.
+            # Adição bacana que fiz, erros agora não fodem o código inteiro :).
             print(f"[ERRO DE DADOS] {erro}")
 
 
@@ -123,4 +140,3 @@ if __name__ == "__main__":
         executar()
     except (KeyboardInterrupt, EOFError):
         print("\nExecução interrompida pelo usuário.")
-
